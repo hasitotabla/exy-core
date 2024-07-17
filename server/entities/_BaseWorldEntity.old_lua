@@ -1,0 +1,61 @@
+class 'BaseWorldEntity' {
+    type = "BaseWorldEntity", 
+
+    -- PRIVATE
+    __metas = {},
+
+    constructor = function(self, entityType, netID)
+        self.type = entityType;
+
+        EntityPool[self.type][netID] = self;
+
+        TriggerClientEvent("Core::Internal::OnEntityCreated", -1, self:getEntityDataForSync());
+        dispatchEntityEvent("onEntityCreated", self);
+    end, 
+
+    -- 
+    -- Sync
+    -- 
+
+    getEntityDataForSync = function(self)
+        return {
+            type = self.type, 
+            metas = self.__metas
+        };
+    end,
+
+    -- 
+    -- Entity
+    -- 
+
+    getPosition = function(self)
+        iprint(self.__netID);
+        -- return GetEntityCoords(self.__netID);
+        return vector3(0, 0, 0);
+    end, 
+
+    -- 
+    -- Meta
+    -- 
+
+    __broadcastMetaChange = function(self, key, value)
+        iprint("BaseWorldEntity::__broadcastMetaChange", key, value);
+        -- TriggerClientEvent("v2_core:meta:change", -1, self:getEntityIdentifier(), key, value);
+    end,
+
+    setMeta = function(self, key, value, broadcastToClients)
+        assert(type(key) == "string", "Key must be a string.");
+        
+        local broadcastToClients = broadcastToClients or false;
+
+        self.__metas[key] = value;
+
+        if (broadcastToClients) then 
+            self:__broadcastMetaChange(key, value);
+        end
+    end,
+
+    getMeta = function(self, key)
+        return self.__metas[key];
+    end
+};
