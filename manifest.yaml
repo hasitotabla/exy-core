@@ -1,3 +1,6 @@
+info:
+  name: "exy_core"
+
 fx_version: "cerulean"
 use_fxv2_oal: "yes"
 lua54: "yes"
@@ -8,11 +11,9 @@ shared_scripts:
   - "common/enums/*.lua"
   - "common/utils/*.lua"
   - "common/entities/_BaseEntity.lua"
-  - "common/entities/_BaseWorldEntity.lua"
   - "common/entities/Player.lua"
 
 server_scripts:
-  - "server/entities/_BaseWorldEntity.lua"
   - "server/entities/_Colshape.lua"
   - "server/entities/Vehicle.lua"
   - "server/entities/Object.lua"
@@ -26,7 +27,6 @@ server_scripts:
   - "Main.lua"
 
 client_scripts:
-  - "client/entities/_BaseWorldEntity.lua"
   - "client/entities/Vehicle.lua"
   - "client/utils/Callback.lua"
   - "common/events/Entity.lua"
@@ -37,3 +37,10 @@ client_scripts:
   - "client/helpers/Player.lua"
   - "client/helpers/Streaming.lua"
   - "Main.lua"
+
+files:
+  - src: "CompatLayer.lua"
+
+exports:
+  - function: "__enum__EntityTypes"
+    env: "shared"

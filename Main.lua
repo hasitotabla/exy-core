@@ -1,5 +1,5 @@
 EntityClasses = {
-    [EntityTypes.BASE_ENTITY] = BaseWorldEntity,
+    [EntityTypes.BASE_ENTITY] = BaseEntity,
     [EntityTypes.PLAYER] = PlayerEntity,
     [EntityTypes.VEHICLE] = VehicleEntity,
 
@@ -23,7 +23,7 @@ EntityPool = {
 
 !if (IS_CLIENT) then 
     EntityCreateHelpers = {
-        [EntityTypes.BASE_ENTITY] = function(entityRemoteData) return BaseWorldEntity:new(entityRemoteData.type, entityRemoteData.netID); end,
+        [EntityTypes.BASE_ENTITY] = function(entityRemoteData) return BaseEntity:new(entityRemoteData.type, entityRemoteData.netID); end,
         [EntityTypes.PLAYER] = function(entityRemoteData) return PlayerEntity:new(entityRemoteData.netID); end,
         [EntityTypes.VEHICLE] = function(entityRemoteData) return VehicleEntity:new(entityRemoteData.netID); end,
     };

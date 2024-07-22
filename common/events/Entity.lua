@@ -22,7 +22,7 @@ function dispatchEntityEvent(eventName, entity, ...)
     
     local args = { ... };
     for index, value in ipairs(args) do 
-        if (type(value) == "table" and value:instanceOf(BaseWorldEntity)) then 
+        if (type(value) == "table" and value:instanceOf(BaseEntity)) then 
             args[index] = convertEntityToReference(value);
         end 
     end

@@ -1,5 +1,10 @@
-local DEBUG = !(SHARED_MODE ~= "prod");
 local CORE_RESOURCE_NAME = "exy_core";
+local DEBUG = exports[CORE_RESOURCE_NAME]:isDebugEnabled();
+local IS_SERVER = IsDuplicityVersion();
+
+if (GetResourceState(CORE_RESOURCE_NAME) ~= "started") then 
+    return error("Core resource is not started.");
+end
 
 -- 
 -- Imported enums and stuff
@@ -175,12 +180,12 @@ getEntitiesByType = function(entityType, rootResource)
     return entities;
 end 
 
-!if (IS_SERVER) then 
+if (IS_SERVER) then 
     createVehicle = function(...) return __createEntity__(EntityTypes.VEHICLE, ...); end
     createPed = function(...) return __createEntity__(EntityTypes.PED, ...); end
     createObject = function(...) return __createEntity__(EntityTypes.OBJECT, ...); end
 
     createColSphere = function(...) return __createEntity__(EntityTypes.COLSPHERE, ...); end
-!else 
+else 
 
-!end 
+end 

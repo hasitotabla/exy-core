@@ -1,4 +1,4 @@
-VehicleEntity = Class("VehicleEntity", BaseWorldEntity);
+VehicleEntity = Class("VehicleEntity", BaseEntity);
 
 function VehicleEntity:constructor(model, position, heading)
     self.__isRepairPending = false;

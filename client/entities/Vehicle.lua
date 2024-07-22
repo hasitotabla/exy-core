@@ -1,4 +1,4 @@
-VehicleEntity = Class("VehicleEntity", BaseWorldEntity);
+VehicleEntity = Class("VehicleEntity", BaseEntity);
 
 function VehicleEntity:constructor(netID)
     self.__entityID = NetworkGetEntityFromNetworkId(netID);

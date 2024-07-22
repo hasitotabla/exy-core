@@ -1,4 +1,4 @@
-ObjectEntity = Class("ObjectEntity", BaseWorldEntity);
+ObjectEntity = Class("ObjectEntity", BaseEntity);
 
 function ObjectEntity:constructor(modelHash, position, isMissionEntity, doorFlag)
     local isMissionEntity = isMissionEntity or false;

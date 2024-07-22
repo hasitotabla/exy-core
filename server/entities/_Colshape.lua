@@ -1,4 +1,4 @@
-ColShapeEntity = Class("ColShapeEntity", BaseWorldEntity);
+ColShapeEntity = Class("ColShapeEntity", BaseEntity);
 
 function ColShapeEntity:constructor(colType, x, y, z)
     assert(colType and ColShapeTypes[colType], "Type must be a ColShapeTypes.");

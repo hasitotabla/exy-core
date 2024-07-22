@@ -1,4 +1,4 @@
-PlayerEntity = Class("PlayerEntity", BaseWorldEntity);
+PlayerEntity = Class("PlayerEntity", BaseEntity);
 
 function PlayerEntity:constructor(netID)
     self:super(EntityTypes.PLAYER, netID);
