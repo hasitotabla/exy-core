@@ -6,6 +6,13 @@ Using this script, you'll be able to write code that's actually maintainable and
 
 ## 📚 Setup
 
+**Standalone**
+
+- Download [the latest release](https://github.com/eutaxy/core/releases/latest) and extract it inside `server-data/resources/exy_core`.
+- Add `@exy_core/CompatLayer.lua` to every resource, you want to use this core.
+
+**With eutaxy-workspace (for experienced developers, includes preprocessing and few other cool features 😎)**
+
 ```sh
 git clone https://github.com/eutaxy/workspace eutaxy-workspace
 cd eutaxy-workspace/src/
@@ -15,9 +22,4 @@ yarn run update
 yarn run dev
 ```
 
-## 🛠️ How to use it
-
-- Download [release](https://www.github.com/eutaxy/releases/xd) from GitHub.
-- Add `@exy_core/CompatLayer.lua` to every resource, you want to use this core.
-
-That's it. :D
+That's it. Have fun :D
