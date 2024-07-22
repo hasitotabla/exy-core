@@ -1,16 +1,14 @@
 local isSpawningInProgress = false;
 
-handleEntityEvent("Player::RequestSpawn", function(player, x, y, z, model)
-    --[[
-        if not spawn.skipFade then
-            DoScreenFadeOut(500)
+handleEntityEvent("Player::RequestSpawn", function(player, data)    
+    if (not player:isLocal()) then 
+        error("Attempted to spawn a non-local player entity.");
+    end
 
-            while not IsScreenFadedOut() do
-                Citizen.Wait(0)
-            end
-        end
-    ]]
-    
+    local x, y, z = table.unpack(data.pos);
+    local model = data.model or GetHashKey("mp_m_freemode_01");
+    local skipFade = data.skipFade or false;
+
     -- force the values to be floats
     x = x + 0.0;
     y = y + 0.0;
@@ -40,10 +38,10 @@ handleEntityEvent("Player::RequestSpawn", function(player, x, y, z, model)
 
     local time = GetGameTimer();
     while (
-        not HasCollisionLoadedAroundEntity(ped) and 
+        not HasCollisionLoadedAroundEntity(playerPed) and 
         (GetGameTimer() - time) < 5000
     ) do
-        Wait(0);
+        Wait(100);
     end
 
     ShutdownLoadingScreen();
@@ -51,7 +49,7 @@ handleEntityEvent("Player::RequestSpawn", function(player, x, y, z, model)
     if (IsScreenFadedOut()) then 
         DoScreenFadeIn(500);
 
-        while not IsScreenFadedIn() do
+        while (not IsScreenFadedIn()) do
             Wait(0);
         end
     end 

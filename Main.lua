@@ -1,3 +1,6 @@
+IS_DEBUG_ENABLED = !(DEBUG == true);
+exports("isDebugEnabled", function() return IS_DEBUG_ENABLED; end);
+
 EntityClasses = {
     [EntityTypes.BASE_ENTITY] = BaseEntity,
     [EntityTypes.PLAYER] = PlayerEntity,
@@ -6,10 +9,14 @@ EntityClasses = {
     [EntityTypes.COLSHAPE] = ColShapeEntity, -- Base class for colshapes
     [EntityTypes.COLSPHERE] = ColSphereEntity,
 };
-
 EntityPool = {
     --[[
         [key: `EntityType:ID`]: Entity;
+    ]]
+};
+EntityRefsByType = {
+    --[[
+        [key: `EntityType`]: { [key: ID]: Entity };
     ]]
 };
 
@@ -22,6 +29,8 @@ EntityPool = {
 !end
 
 !if (IS_CLIENT) then 
+    IS_CORE_INITIALIZED = false;
+
     EntityCreateHelpers = {
         [EntityTypes.BASE_ENTITY] = function(entityRemoteData) return BaseEntity:new(entityRemoteData.type, entityRemoteData.netID); end,
         [EntityTypes.PLAYER] = function(entityRemoteData) return PlayerEntity:new(entityRemoteData.netID); end,
@@ -44,7 +53,7 @@ EntityPool = {
         error("No valid entity ID found for type " .. entityType);
     end 
 
-    addFetchHandler("Core::Internal::Initialize", function(done, ...)
+    addFetchHandler("Main::Initialize", function(done, ...)
         local client = source;
     
         local playerEntity = EntityPool[EntityTypes.PLAYER .. ":" .. client];
@@ -56,17 +65,17 @@ EntityPool = {
         for entityID, entity in pairs(EntityPool) do 
             table.insert(entitiesToSync, entity:__getEntityDataForSync());
         end
-    
+        
         done({ entities = entitiesToSync });
     end);
 !else
-    local function main()
-        local response = useFetch("Core::Internal::Initialize");
+    local function main()        
+        local response = useFetch("Main::Initialize");
         if (not response) then 
             return;
         end
 
-        for _, entityData in ipairs(entities) do 
+        for _, entityData in ipairs(response.entities) do 
             local entityCreateFunc = EntityCreateHelpers[entityData.type];
             if (not entityCreateFunc) then 
                 print("Entity class not found for type " .. entityData.type);
@@ -74,9 +83,16 @@ EntityPool = {
             end
 
             local entity = entityCreateFunc(entityData);
+            EntityPool[entity:getUniqueIdentifier()] = entity;
+
             ::continue::
         end
+
+        IS_CORE_INITIALIZED = true;
+        processPendingEntityCreations();
+
+        iprint(response);
     end 
 
-    CreateThread(Main);
+    CreateThread(main);
 !end

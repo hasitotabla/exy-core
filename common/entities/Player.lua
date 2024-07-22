@@ -48,7 +48,14 @@ end
 !end
 
 !if (IS_SERVER) then 
-    function PlayerEntity:spawn(x, y, z, model)
-        triggerEntityEvent("Player::RequestSpawn", self, self.__netID, x, y, z, model);
+    function PlayerEntity:spawn(x, y, z, model, skipFade)
+        local model = model or GetHashKey("mp_m_freemode_01");
+        local skipFade = skipFade or false;
+
+        triggerEntityEvent("Player::RequestSpawn", self, self.__netID, {
+            pos = { x, y, z },
+            model = model,
+            skipFade = skipFade,
+        });
     end 
 !end 

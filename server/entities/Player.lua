@@ -13,5 +13,6 @@ function PlayerEntity:getPosition()
 end
 
 function PlayerEntity:spawn(x, y, z, model)
-    triggerEntityEvent("Player::RequestSpawn", self, self.__netID, x, y, z, model);
+    print("mit izelsz?????")
+    -- triggerEntityEvent("Player::RequestSpawn", self, self.__netID, x, y, z, model);
 end 
