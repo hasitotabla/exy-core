@@ -1,9 +1,11 @@
-BaseWorldEntity = Class("BaseWorldEntity");
+BaseWorldEntity = Class("BaseWorldEntity", BaseEntity);
 
 function BaseWorldEntity:constructor(entityType, id)
+    entityType = entityType or EntityTypes.BASE_WORLD_ENTITY;
+
     self.__position = { x = 0, y = 0, z = 0 };
 
-    self:super(EntityTypes.BASE_WORLD_ENTITY, id);
+    self:super(entityType, id);
 end 
 
 function BaseWorldEntity:destroy()

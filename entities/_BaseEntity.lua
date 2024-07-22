@@ -1,7 +1,7 @@
 BaseEntity = Class("BaseEntity");
 
 function BaseEntity:constructor(entityType, id)
-    self.__id = id or getIDForEntityType(self.__type);
+    self.__netID = id or getIDForEntityType(self.__type);
     self.__type = entityType or EntityTypes.BASE_ENTITY;
     self.__resourceRoot = GetCurrentResourceName();
     
@@ -11,10 +11,6 @@ end
 function BaseEntity:__postDestroy()
     local uniqueIdentifier = self:getUniqueIdentifier();
     EntityPool[uniqueIdentifier] = nil;
-end
-
-function BaseEntity:destroy()
-    error("BaseEntity:destroy() must be overridden in the child class.");
 end
 
 -- 

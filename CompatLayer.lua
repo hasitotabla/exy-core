@@ -99,12 +99,15 @@ AddEventHandler = function(eventName, callback)
     return __originalAddEventHandler(eventName, function(...)
         local invoking = GetInvokingResource();
         local lastSource = _G.source;
+        local lastInvoking = _G.invokingResource;
 
         if (invoking ~= CORE_RESOURCE_NAME) then 
             _G.source = source;
+            _G.invokingResource = invoking;
 
             local result = { callback(...) };
             _G.source = lastSource;
+            _G.invokingResource = lastInvoking;
 
             return table.unpack(result);
         end 

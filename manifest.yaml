@@ -7,12 +7,13 @@ shared_scripts:
   - "shared/imports/*.lua"
   - "shared/enums/*.lua"
   - "shared/utils/*.lua"
-  - "shared/entities/_BaseObject.lua"
+  - "entities/_BaseEntity.lua"
+  - "entities/_BaseWorldEntity.lua"
+  - "entities/Player.lua"
 
 server_scripts:
   - "server/entities/_BaseWorldEntity.lua"
   - "server/entities/_Colshape.lua"
-  - "server/entities/Player.lua"
   - "server/entities/Vehicle.lua"
   - "server/entities/Object.lua"
   - "server/entities/ColshapeCuboid.lua"
@@ -22,11 +23,10 @@ server_scripts:
   - "server/events/player/PlayerConnect.lua"
   - "server/helpers/EntityCreate.lua"
   - "server/utils/Callback.lua"
-  - "server/Main.lua"
+  - "Main.lua"
 
 client_scripts:
   - "client/entities/_BaseWorldEntity.lua"
-  - "client/entities/Player.lua"
   - "client/entities/Vehicle.lua"
   - "client/utils/Callback.lua"
   - "shared/events/Entity.lua"
@@ -36,4 +36,4 @@ client_scripts:
   - "client/events/internal/Vehicle.lua"
   - "client/helpers/Player.lua"
   - "client/helpers/Streaming.lua"
-  - "client/Main.lua"
+  - "Main.lua"

@@ -1,9 +1,20 @@
-PlayerEntity = Class("PlayerEntity", BaseWorldEntity);
+PlayerEntity = Class("PlayerEntity", BaseEntity);
 
-function PlayerEntity:constructor(netID)
-    self:super(EntityTypes.PLAYER, netID);
+function PlayerEntity:constructor(id)
+    self:super(EntityTypes.PLAYER, id);
 end
 
+!if (IS_SERVER) then 
+function PlayerEntity:destroy()
+    print('destroyed player entity');
+end 
+!end
+
+function PlayerEntity:getPosition()
+    return table.unpack(GetEntityCoords(GetPlayerPed(self.__netID)));
+end
+
+!if (IS_CLIENT) then 
 function PlayerEntity:isLocal()
     return self.__netID == GetPlayerServerId(PlayerId());
 end
@@ -30,3 +41,10 @@ function PlayerEntity:freeze(state)
     FreezeEntityPosition(PlayerPedId(), state);
     SetPlayerControl(PlayerId(), not state, 0);
 end 
+!end
+
+!if (IS_SERVER) then 
+function PlayerEntity:spawn(x, y, z, model)
+    triggerEntityEvent("Player::RequestSpawn", self, self.__netID, x, y, z, model);
+end 
+!end 
