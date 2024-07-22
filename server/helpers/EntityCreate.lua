@@ -14,6 +14,9 @@ function createEntity(entityType, ...)
     local uniqueIdentifier = entity:getUniqueIdentifier();
 
     EntityPool[uniqueIdentifier] = entity;
+    
+    if (not EntityRefsByType[entityType]) then EntityRefsByType[entityType] = {}; end
+    EntityRefsByType[entityType][uniqueIdentifier] = entity;
 
     dispatchEntityEvent("onEntityCreated", entity);
     TriggerClientEvent("Core::Internal::OnEntityCreated", -1, entity:__getEntityDataForSync());

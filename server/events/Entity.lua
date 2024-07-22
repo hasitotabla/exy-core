@@ -1,5 +1,6 @@
 
 function triggerEntityEvent(eventName, entity, playerToTrigger, ...)
+    print(debug.traceback())
     print("triggerEntityEvent", eventName, entity, playerToTrigger, ...);
 
     local entityId = entity:getUniqueIdentifier();

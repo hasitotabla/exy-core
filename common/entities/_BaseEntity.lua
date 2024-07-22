@@ -1,7 +1,7 @@
 BaseEntity = Class("BaseEntity");
 
 function BaseEntity:constructor(entityType, id)
-    self.__netID = id or getIDForEntityType(self.__type);
+    self.__netID = tonumber(id or getIDForEntityType(self.__type));
     self.__type = entityType or EntityTypes.BASE_ENTITY;
     self.__resourceRoot = GetCurrentResourceName();
     
@@ -17,7 +17,7 @@ end
 -- Getters / Setters
 -- 
 
-function BaseEntity:getNetID() return self.__netID; end
+function BaseEntity:getNetID() return tonumber(self.__netID); end
 function BaseEntity:getType() return self.__type; end
 function BaseEntity:getUniqueIdentifier()
     return self.__type .. ":" .. self.__netID;

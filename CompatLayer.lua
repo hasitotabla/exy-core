@@ -1,5 +1,4 @@
 local CORE_RESOURCE_NAME = "exy_core";
-local DEBUG = exports[CORE_RESOURCE_NAME]:isDebugEnabled();
 local IS_SERVER = IsDuplicityVersion();
 
 if (GetResourceState(CORE_RESOURCE_NAME) ~= "started") then 
@@ -9,6 +8,8 @@ end
 -- 
 -- Imported enums and stuff
 -- 
+
+local DEBUG = exports[CORE_RESOURCE_NAME]:isDebugEnabled();
 
 -- local CoreEvents = exports[CORE_RESOURCE_NAME]:__enum__CoreEvents();
 local EntityTypes = exports[CORE_RESOURCE_NAME]:__enum__EntityTypes();

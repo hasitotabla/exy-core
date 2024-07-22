@@ -128,6 +128,7 @@ end
     end
 
     useFetch = function(eventName, ...)
+        print("gecisfaszom#1")
         local data = { ... };
         local responseToken = getRandomString(16);
         local handlePromise = promise.new();
@@ -138,4 +139,6 @@ end
 
         return Citizen.Await(handlePromise);
     end 
+
+    print("megolom csaladod am#1", useFetch)
 !end 

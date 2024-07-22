@@ -42,5 +42,7 @@ files:
   - src: "CompatLayer.lua"
 
 exports:
-  - function: "__enum__EntityTypes"
-    env: "shared"
+  - function: isDebugEnabled
+    env: shared
+  - function: __enum__EntityTypes
+    env: shared

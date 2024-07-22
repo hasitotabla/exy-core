@@ -1,5 +1,3 @@
-print('toltodjel be retkes kurva')
-
 local function convertEntityToReference(entity)
     return {
         __entityMT = true, 

@@ -1,4 +1,6 @@
-function createEntityFromRemote(entityData)
+QueuedEntityCreations = {};
+
+local function createEntityFromRemote(entityData)
     assert(type(entityData) == "table", "Entity data must be a table.");
 
     local entityType = entityData.type;
@@ -15,12 +17,30 @@ function createEntityFromRemote(entityData)
     return EntityCreateHelpers[entityType](entityData);
 end 
 
+function processPendingEntityCreations()
+    for _, entityData in ipairs(QueuedEntityCreations) do 
+        local entity = createEntityFromRemote(entityData);
+        EntityPool[entity:getUniqueIdentifier()] = entity;
+
+        dispatchEntityEvent("onClientEntityCreated", entity);
+    end
+
+    QueuedEntityCreations = {};
+end 
+
 RegisterNetEvent("Core::Internal::OnEntityCreated", function(entityData)
-    print("Entity created", json.encode(entityData));
+    print(entityData.netID);
+
+    if (not IS_CORE_INITIALIZED) then 
+        table.insert(QueuedEntityCreations, entityData);
+        return;
+    end
+
     local entity = createEntityFromRemote(entityData);
     EntityPool[entity:getUniqueIdentifier()] = entity;
 
     dispatchEntityEvent("onClientEntityCreated", entity);
+    processQueuedEntityEvents(entity:getUniqueIdentifier());
 end);
 
 RegisterNetEvent("Core::Internal::OnEntityMetaChange", function(entityID, key, value)

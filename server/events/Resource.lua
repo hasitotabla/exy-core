@@ -4,7 +4,9 @@ AddEventHandler("onResourceStart", function(resourceName)
     end
 
     for _, playerID in ipairs(GetPlayers()) do 
-        playerEntity = createEntity(EntityTypes.PLAYER, playerID);
+        if (not EntityPool[EntityTypes.PLAYER .. ":" .. playerID]) then 
+            playerEntity = createEntity(EntityTypes.PLAYER, playerID);
+        end 
     end
 end);
 
