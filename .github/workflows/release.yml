@@ -39,5 +39,5 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: Release ${{ github.sha }}
+          tag_name: release-${{ github.sha }}
           files: .dist/server-data/resources/exy_core/exy_core.zip
