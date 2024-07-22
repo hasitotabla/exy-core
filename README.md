@@ -2,7 +2,7 @@
 
 **exy-core is a resource created for making development easier on FiveM.**
 
-Using this script, you'll be able to write code that's actually and secure.
+Using this script, you'll be able to write code that's actually maintainable and secure.
 
 ## 📚 Setup
 
