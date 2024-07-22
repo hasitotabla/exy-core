@@ -31,13 +31,19 @@ jobs:
       - name: Building the project
         run: |
           bun install
-          bun run build
+          bun run build --clean --bundle --minify
       - name: Zip the build
         run: |
           cd .dist/server-data/resources/exy_core
           zip -r exy_core.zip *
-      - name: Release
+
+      - uses: bhowell2/github-substring-action@1.0.2
+        id: release_id
+        with:
+          value: ${{ github.sha }}
+          length_from_start: 7
+      - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: release-${{ github.sha }}
+          tag_name: release-${{ steps.release_id.outputs.substring }}
           files: .dist/server-data/resources/exy_core/exy_core.zip
