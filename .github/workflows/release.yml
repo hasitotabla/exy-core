@@ -21,11 +21,11 @@ jobs:
       - name: Get workspace for building
         uses: actions/checkout@v2
         with:
-          repository: eutaxy/workspace@master
+          repository: eutaxy/workspace
           path: .
           ssh-key: ${{ secrets.WS_PAT }}
       - name: output current directory
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         with:
           path: src/exy_core
       - name: Building the project
