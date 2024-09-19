@@ -1,4 +1,4 @@
-# Eutaxy Core
+# eutaxy-core [WIP]
 
 **exy-core is a resource created for making development easier on FiveM.**
 
