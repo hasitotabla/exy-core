@@ -7,7 +7,7 @@ function BaseWorldEntity:constructor(entityType, id)
 end 
 
 function BaseWorldEntity:destroy()
-    print("delete");
+
 end
 
 -- 

@@ -90,8 +90,6 @@ EntityRefsByType = {
 
         IS_CORE_INITIALIZED = true;
         processPendingEntityCreations();
-
-        iprint(response);
     end 
 
     CreateThread(main);

@@ -29,8 +29,6 @@ function processPendingEntityCreations()
 end 
 
 RegisterNetEvent("Core::Internal::OnEntityCreated", function(entityData)
-    print(entityData.netID);
-
     if (not IS_CORE_INITIALIZED) then 
         table.insert(QueuedEntityCreations, entityData);
         return;

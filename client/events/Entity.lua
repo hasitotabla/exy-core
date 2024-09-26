@@ -36,7 +36,6 @@ function handleEntityEvent(eventName, callback)
 end 
 
 function processQueuedEntityEvents(entityID)
-    print('csinalas for ', entityID)
     if (not queuedEvents[entityID]) then 
         return;
     end

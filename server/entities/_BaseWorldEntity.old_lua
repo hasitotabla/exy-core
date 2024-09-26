@@ -29,7 +29,6 @@ class 'BaseWorldEntity' {
     -- 
 
     getPosition = function(self)
-        iprint(self.__netID);
         -- return GetEntityCoords(self.__netID);
         return vector3(0, 0, 0);
     end, 
@@ -39,7 +38,6 @@ class 'BaseWorldEntity' {
     -- 
 
     __broadcastMetaChange = function(self, key, value)
-        iprint("BaseWorldEntity::__broadcastMetaChange", key, value);
         -- TriggerClientEvent("v2_core:meta:change", -1, self:getEntityIdentifier(), key, value);
     end,
 
